@@ -46,18 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Baugette.cs" />
-    <Compile Include="FileReader.cs" />
-    <Compile Include="FmMain.cs">
+    <Compile Include="logic\Baugette.cs" />
+    <Compile Include="data\FileReader.cs" />
+    <Compile Include="UI\FmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FmMain.Designer.cs">
+    <Compile Include="UI\FmMain.Designer.cs">
       <DependentUpon>FmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Workshop.cs" />
-    <EmbeddedResource Include="FmMain.resx">
+    <Compile Include="logic\Workshop.cs" />
+    <EmbeddedResource Include="UI\FmMain.resx">
       <DependentUpon>FmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

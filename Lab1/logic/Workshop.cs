@@ -38,25 +38,19 @@ namespace Lab1
             foreach (KeyValuePair<int, int> pair in order)
             {
                 for (int i = 0; i < baugette_types[pair.Key].materials.Count(); i++)
-                {
                     required_materials[baugette_types[pair.Key].materials[i]] += baugette_types[pair.Key].count[i] * pair.Value;
-                }
             }
 
             foreach (KeyValuePair<string, int> pair in required_materials)
             {
                 if (materials[pair.Key] < pair.Value)
-                {
                     output[pair.Key] = pair.Value - materials[pair.Key];
-                }
             }
 
             foreach (KeyValuePair<string, int> pair in output)
             {
                 if (pair.Value != 0)
-                {
                     return output;
-                }
             }
             return null;
         }
