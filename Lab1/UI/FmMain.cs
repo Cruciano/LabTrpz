@@ -45,7 +45,7 @@ namespace Lab1
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             Dictionary<string, int> mater;
-            if ((mater = shop.GetMaterials()) != null)
+            if ((mater = shop.GetMaterials()).Count != 0)
             {
                 label3.Visible = true;
                 label3.Text = "Матеріалів\n не вистачає";
