@@ -9,16 +9,16 @@ namespace Lab1
     class Workshop
     {
         private List<Baugette> baugetteTypes;
-        private Dictionary<string, int> materials;
+        private Dictionary<string, int> materials;  
         private Dictionary<int, int> order;
 
         private string baugettePath = "Files/Baugette.txt";
         private string materialsPath = "Files/Materials.txt";
 
-        public Workshop()
+        public Workshop(IDataReader dataReader)
         {
-            baugetteTypes = FileReader.ReadBaugette(baugettePath);
-            materials = FileReader.ReadMaterials(materialsPath);
+            baugetteTypes = dataReader.ReadBaugette(baugettePath);
+            materials = dataReader.ReadMaterials(materialsPath);
             order = new Dictionary<int, int>();
         }
 
@@ -27,7 +27,7 @@ namespace Lab1
             this.order.Add(type, count);
         }
 
-        public Dictionary<string, int> GetMaterials()
+        public Dictionary<string, int> GetNecessaryMaterials()
         {
             Dictionary<string, int> output = new Dictionary<string, int>();
             Dictionary<string, int> requiredMaterials = new Dictionary<string, int>();
@@ -44,16 +44,22 @@ namespace Lab1
             return new Dictionary<string, int>();
         }
 
-        public List<Baugette> GetBaugetteList()
+        public List<string> GetBaugetteList()
         {
-            return this.baugetteTypes;
+            List<string> outlist = new List<string>();
+            foreach (var baugette in baugetteTypes)
+            {
+                outlist.Add(baugette.name);
+            }
+
+            return outlist;
         }
 
 
 
         private void FillDictionaries(Dictionary<string, int> requiredMaterials, Dictionary<string, int> output)
         {
-            foreach (KeyValuePair<string, int> pair in materials)
+            foreach (var pair in materials)
             {
                 requiredMaterials.Add(pair.Key, 0);
                 output.Add(pair.Key, 0);
@@ -62,7 +68,7 @@ namespace Lab1
 
         private void CountMaterials(Dictionary<string, int> requiredMaterials)
         {
-            foreach (KeyValuePair<int, int> pair in order)
+            foreach (var pair in order)
             {
                 for (int i = 0; i < baugetteTypes[pair.Key].materials.Count(); i++)
                     requiredMaterials[baugetteTypes[pair.Key].materials[i]] += baugetteTypes[pair.Key].count[i] * pair.Value;
@@ -71,7 +77,7 @@ namespace Lab1
 
         private void SubstractMaterials(Dictionary<string, int> requiredMaterials, Dictionary<string, int> output)
         {
-            foreach (KeyValuePair<string, int> pair in requiredMaterials)
+            foreach (var pair in requiredMaterials)
             {
                 if (materials[pair.Key] < pair.Value)
                     output[pair.Key] = pair.Value - materials[pair.Key];

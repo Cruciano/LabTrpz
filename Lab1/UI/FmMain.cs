@@ -23,16 +23,14 @@ namespace Lab1
 
         private void FmMain_Load(object sender, EventArgs e)
         {
-            shop = new Workshop();
-            int i = 1;
+            shop = new Workshop(new FileReader());
             types = new List<string>();
-            foreach(Baugette b in shop.GetBaugetteList())
+            foreach(var b in shop.GetBaugetteList())
             {
-                comboBox1.Items.Add("type" + i.ToString());
-                types.Add("type" + i.ToString());
-                i++;
+                comboBox1.Items.Add(b);
+                types.Add(b);
             }
-            comboBox1.Text = "type1";
+            comboBox1.Text = comboBox1.Items[0].ToString();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -45,7 +43,7 @@ namespace Lab1
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             Dictionary<string, int> mater;
-            if ((mater = shop.GetMaterials()).Count != 0)
+            if ((mater = shop.GetNecessaryMaterials()).Count != 0)
             {
                 label3.Visible = true;
                 label3.Text = "Матеріалів\n не вистачає";

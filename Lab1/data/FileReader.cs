@@ -7,29 +7,30 @@ using System.IO;
 
 namespace Lab1
 {
-    static class FileReader
+    class FileReader: IDataReader
     {
-        public static List<Baugette> ReadBaugette(string path)
+        public List<Baugette> ReadBaugette(string path)
         {
             StreamReader sr = new StreamReader(path);
 
             List<Baugette> bauglist = new List<Baugette>();
 
-            string line, line2;
+            string name, line, line2;
             int count, count2;
-            while((line = sr.ReadLine()) != null)
+            while((name = sr.ReadLine()) != null)
             {
+                line = sr.ReadLine();
                 line2 = sr.ReadLine();
                 count = Convert.ToInt32(sr.ReadLine());
                 count2 = Convert.ToInt32(sr.ReadLine());
-                bauglist.Add(new Baugette(new string[] {line, line2}, new int[] {count, count2}));
+                bauglist.Add(new Baugette(name, new string[] {line, line2}, new int[] {count, count2}));
             }
 
             sr.Close();
             return bauglist;
         }
 
-        public static Dictionary<string, int> ReadMaterials(string path)
+        public Dictionary<string, int> ReadMaterials(string path)
         {
             StreamReader sr = new StreamReader(path);
 

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="data\IDataReader.cs" />
     <Compile Include="logic\Baugette.cs" />
     <Compile Include="data\FileReader.cs" />
     <Compile Include="UI\FmMain.cs">
